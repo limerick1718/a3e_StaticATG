@@ -9,13 +9,13 @@ working_dir=$(pwd)
 
 apkname=$(basename $apk_path)
 
+apk_path=$(realpath $apk_path)
+jre_path=$(realpath $jre_path)
+
 echo "APK path: $apk_path"
 echo "JRE path: $jre_path"
 echo "Apk Name: $apkname"
 echo "Working dir: $working_dir"
-
-apk_path=$(realpath $apk_path)
-jre_path=$(realpath $jre_path)
 
 if [ ! -d "$result_dir" ]; then
 	mkdir -p "$result_dir"
@@ -43,6 +43,8 @@ then
 else
 	echo "Error processing SATG"
 fi
+
+echo "Processed in $DIFF seconds."  >> $a3e_dir/sap.log
 
 mv $a3e_dir/$apkname".g.xml" $result_dir
 mv $a3e_dir/$apkname".g.xml.dot" $result_dir
